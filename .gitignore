@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+<<<<<<< HEAD
 
 # C extensions
 *.so
@@ -10,6 +11,11 @@ __pycache__/
 #Large folders
 data
 
+=======
+# C extensions
+*.so
+
+>>>>>>> 96586fdee930739e9fb62edae4b6886a0fdaaa05
 # Distribution / packaging
 .Python
 build/
@@ -131,4 +137,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+<<<<<<< HEAD
 .npy
+=======
+>>>>>>> 96586fdee930739e9fb62edae4b6886a0fdaaa05

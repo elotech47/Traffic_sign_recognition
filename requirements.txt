@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 opencv-contrib-python
 numpy
 scikit-learn
@@ -5,3 +6,9 @@ scikit-image
 imutils
 matplotlib
 tensorflow-gpu
+=======
+numpy
+pandas
+cv2
+tensorflow
+>>>>>>> 96586fdee930739e9fb62edae4b6886a0fdaaa05
