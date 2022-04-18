@@ -1,30 +1,56 @@
 import streamlit as st
 import tensorflow as tf
 from tensorflow.keras import models
-import io
+from skimage import transform
+from skimage import exposure
+from skimage import io as sk_io
 import os
+import numpy as np
 from PIL import Image
-import torch
-from torchvision import transforms
-import wget
+import io
+import cv2
+
 
 
 def load_image():
      uploaded_file = st.file_uploader(label='Pick a traffic sign to predict')
      if uploaded_file is not None:
           image_data = uploaded_file.getvalue()
+          image = Image.open(io.BytesIO(image_data))
           st.image(image_data)
-          return Image.open(io.BytesIO(image_data))
+          return image
+          #return Image.open(image_data)
+
      else:
         return None
 
 def load_model(path):
      model = models.load_model(path)
 
+def prepare_image(image):
+     print(image)
+     print(type(image))
+    
+     image = transform.resize(image, (32, 32))
+     image = exposure.equalize_adapthist(image, clip_limit=0.1)
+     image = image.astype("float32") / 255.0
+     return image.reshape(1, 32,32,3)
+
+def predict_image(image, model):
+    return np.array(model(image)).round(3)
+
 def main():
-    st.title('TRAFFIC SIGN RECOGNITION')
-    st.info('Student project for Maths 4997 @LSU')
-    load_image()
+     st.title('TRAFFIC SIGN RECOGNITION')
+     st.info('Student project for Maths 4997 @LSU')
+     image  = load_image()
+     model = load_model("trafficNet.h5")
+     result = st.button('Predict Image')
+     if result:
+          st.write('Calculating results...')
+          test_image = prepare_image(image)
+          prediction = predict_image(test_image, model=model)
+          print(prediction)
+    
 
 
 if __name__ == '__main__':
