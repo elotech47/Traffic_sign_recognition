@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow.keras import models
 from skimage import transform
 from skimage import exposure
-from skimage import io as sk_io
+# from skimage import io
 import os
 import numpy as np
 from PIL import Image
