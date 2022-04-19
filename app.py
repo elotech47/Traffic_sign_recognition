@@ -8,7 +8,6 @@ import os
 import numpy as np
 from PIL import Image
 import io
-import cv2
 
 
 
@@ -18,7 +17,7 @@ def load_image():
           image_data = uploaded_file.getvalue()
           image = Image.open(io.BytesIO(image_data))
           st.image(image_data)
-          return image
+          return np.asarray(image)
           #return Image.open(image_data)
 
      else:
@@ -28,9 +27,6 @@ def load_model(path):
      model = models.load_model(path)
 
 def prepare_image(image):
-     print(image)
-     print(type(image))
-    
      image = transform.resize(image, (32, 32))
      image = exposure.equalize_adapthist(image, clip_limit=0.1)
      image = image.astype("float32") / 255.0
@@ -51,7 +47,5 @@ def main():
           prediction = predict_image(test_image, model=model)
           print(prediction)
     
-
-
 if __name__ == '__main__':
     main()
